@@ -53,7 +53,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log('error creating user', error.message);
     }
   } else {
-    console.log("Such User exists!");
+    // console.log("Such User exists!");
     // console.table(docSnapshotUser.data())
   }
 
