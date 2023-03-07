@@ -20,7 +20,7 @@ export default class SignIn extends React.Component {
     event.preventDefault();
 
     this.setState({ email: '', password: '' })
-    console.table(this.state)
+    // console.table(this.state)
   }
 
   handleChange = (event) => {
@@ -34,7 +34,8 @@ export default class SignIn extends React.Component {
 
     return (
       <div className='sign-in'>
-        <span className='title'>Sign in with your email and password</span>
+        <h2 className='title'>I already have an account</h2>
+        <span>Sign in with your email and password</span>
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name="email"

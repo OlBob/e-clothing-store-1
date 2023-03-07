@@ -9,7 +9,7 @@ import { initializeApp } from "firebase/app";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { doc, getDoc, setDoc, getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBs0x6V9Z1bCkaojn3taej89uyoPkdxxKM",
@@ -24,6 +24,41 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // debugger
+  if (!userAuth) return;
+
+  const usersCollection = collection(firestore, 'users');
+  // const docSnapshotUsers = await getDocs(usersCollection);
+  // console.log(docSnapshotUsers);
+
+  const userReference = doc(usersCollection, userAuth.uid);
+  const docSnapshotUser = await getDoc(userReference);
+
+  if (!docSnapshotUser.exists()) {
+    // debugger
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userReference, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData
+      });
+
+    } catch (error) {
+      console.log('error creating user', error.message);
+    }
+  } else {
+    console.log("Such User exists!");
+    // console.table(docSnapshotUser.data())
+  }
+
+  return userReference
+}
 
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
