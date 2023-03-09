@@ -9,7 +9,7 @@ import { initializeApp } from "firebase/app";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { doc, getDoc, setDoc, getFirestore, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, getFirestore, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBs0x6V9Z1bCkaojn3taej89uyoPkdxxKM",
